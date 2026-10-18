@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f0f12">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Chicago — @itschicagoyt. Find me on Discord, YouTube and Xbox.">
+  <meta property="og:title" content="Chicago | @itschicagoyt">
+  <meta property="og:description" content="Find Chicago on Discord, YouTube and Xbox.">
+  <meta property="og:image" content="assets/preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <title>@itschicagoyt</title>
+</head>
+<body>
+  <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+    <symbol id="icon-volume" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm4 4a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/></symbol>
+    <symbol id="icon-muted" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/></symbol>
+    <symbol id="icon-discord" viewBox="0 0 24 24"><path d="M19.7 5.3A18.8 18.8 0 0 0 15.1 4l-.6 1.3a17 17 0 0 0-5 0L8.9 4a18.8 18.8 0 0 0-4.6 1.3C1.5 9.5.7 13.6 1.1 17.6a18.8 18.8 0 0 0 5.7 2.8l1.2-1.9-1.8-.9.5-.4c3.5 1.7 7.1 1.7 10.6 0l.5.4-1.8.9 1.2 1.9a18.8 18.8 0 0 0 5.7-2.8c.5-4.6-.8-8.6-3.2-12.3ZM8.8 15.2c-1.1 0-1.9-1-1.9-2.1S7.7 11 8.8 11s1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm6.4 0c-1.1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z"/></symbol>
+    <symbol id="icon-youtube" viewBox="0 0 24 24"><path d="M22 7.15a2.7 2.7 0 0 0-1.9-1.91C18.42 4.8 12 4.8 12 4.8s-6.42 0-8.1.44A2.7 2.7 0 0 0 2 7.15a28 28 0 0 0-.45 4.85A28 28 0 0 0 2 16.85a2.7 2.7 0 0 0 1.9 1.91c1.68.44 8.1.44 8.1.44s6.42 0 8.1-.44a2.7 2.7 0 0 0 1.9-1.91 28 28 0 0 0 .45-4.85A28 28 0 0 0 22 7.15ZM10 15.4V8.6l6 3.4-6 3.4Z"/></symbol>
+    <symbol id="icon-xbox" viewBox="0 0 24 24"><path d="M12 1.8c-2.1 0-4.1.64-5.72 1.7 2.08-.1 4.05.9 5.72 2.04 1.67-1.14 3.64-2.14 5.72-2.04A10.15 10.15 0 0 0 12 1.8ZM3.67 5.4a10.2 10.2 0 0 0 1.78 14.3c-.65-3.67 1.43-8.55 4.54-12.24-2.13-1.3-4.2-2.08-6.32-2.06Zm16.66 0c-2.12-.02-4.2.76-6.32 2.06 3.11 3.69 5.19 8.57 4.54 12.24A10.2 10.2 0 0 0 20.33 5.4ZM12 9.3c-3.85 3.12-6.3 7.46-5.87 11.13A10.15 10.15 0 0 0 12 22.2c2.13 0 4.12-.66 5.87-1.77C18.3 16.76 15.85 12.42 12 9.3Z"/></symbol>
+  </svg>
+
+  <div class="scene" aria-hidden="true">
+    <video id="background-video" class="background-video" src="assets/background.mp4" poster="assets/poster.webp" playsinline loop muted preload="metadata"></video>
+    <div class="scene-darkening"></div>
+    <div class="rain-overlay"></div>
+    <div class="scene-vignette"></div>
+  </div>
+
+  <div id="welcome" class="welcome-screen" role="button" tabindex="0" aria-label="Enter website">
+    <span class="welcome-message">[ Ready? ]</span>
+    <span class="welcome-hint">Click anywhere to enter</span>
+  </div>
+
+  <aside class="clock-panel" aria-label="Current Chicago time">
+    <svg class="icon" aria-hidden="true"><use href="#icon-clock"/></svg>
+    <div class="clock-text"><time id="local-time">--:--</time><span id="local-date">Chicago</span></div>
+    <span class="clock-zone" id="local-zone">CT</span>
+  </aside>
+
+  <nav class="section-tabs" role="tablist" aria-label="Website sections">
+    <button type="button" role="tab" id="tab-links" data-tab="links" aria-controls="panel-links" aria-selected="true" tabindex="0">Links</button>
+    <button type="button" role="tab" id="tab-discord" data-tab="discord" aria-controls="panel-discord" aria-selected="false" tabindex="-1">Discord</button>
+    <button type="button" role="tab" id="tab-about" data-tab="about" aria-controls="panel-about" aria-selected="false" tabindex="-1">About</button>
+  </nav>
+
+  <main class="main-layout">
+    <div class="profile-wrap" id="profile-container">
+      <section id="panel-links" class="profile-view profile-view-links" role="tabpanel" aria-labelledby="tab-links" tabindex="0">
+        <header class="profile-heading">
+          <div class="avatar-wrap"><img class="avatar" src="assets/avatar.webp" alt="Chicago's profile photo" width="140" height="140"></div>
+          <div class="profile-identification">
+            <h1 class="neon-name">Chicago</h1>
+            <p class="profile-bio">@itschicagoyt</p>
+            <p class="profile-uid"><span class="uid" title="Profile ID">#3263</span></p>
+          </div>
+        </header>
+        <div class="profile-note">Find Chicago on Discord, YouTube and Xbox.</div>
+        <div class="links-footer">
+          <div class="links-icons" aria-label="Social links">
+            <a class="social-icon" href="https://discord.gg/GDGCyCSV7J" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="Discord"><svg aria-hidden="true"><use href="#icon-discord"/></svg></a>
+            <a class="social-icon" href="https://youtube.com/@ItsChicagoYT" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><svg aria-hidden="true"><use href="#icon-youtube"/></svg></a>
+            <a class="social-icon" href="https://xbox.com/play/user/ItsChicagoTV" target="_blank" rel="noopener noreferrer" aria-label="Xbox" title="Xbox"><svg aria-hidden="true"><use href="#icon-xbox"/></svg></a>
+          </div>
+          <p class="tab-caption">Find me around the internet</p>
+        </div>
+      </section>
+
+      <section id="panel-discord" class="profile-view profile-view-discord" role="tabpanel" aria-labelledby="tab-discord" tabindex="0" hidden>
+        <div class="presence" id="presence">
+          <span class="presence-avatar" id="presence-avatar-wrap">
+            <svg class="presence-fallback" aria-hidden="true"><use href="#icon-discord"/></svg>
+            <img id="presence-avatar" alt="" width="52" height="52" hidden>
+            <i class="status-dot" id="presence-status" data-status="unknown" hidden></i>
+          </span>
+          <span class="presence-text"><strong id="presence-name">Chicago</strong><small id="presence-line">Join the community</small></span>
+          <span class="presence-art" id="presence-art" hidden><img id="presence-art-img" alt="" width="52" height="52"></span>
+        </div>
+        <p class="discord-description">Chat with the community, share what you're working on, and keep up with what's new.</p>
+        <a class="discord-join" href="https://discord.gg/GDGCyCSV7J" target="_blank" rel="noopener noreferrer">Join the Discord <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+      </section>
+
+      <section id="panel-about" class="profile-view profile-view-about" role="tabpanel" aria-labelledby="tab-about" tabindex="0" hidden>
+        <div class="about-head"><img class="about-avatar" src="assets/avatar.webp" alt="" width="70" height="70"><div><h2 class="view-title">About me</h2><p class="view-subtitle">@itschicagoyt</p></div></div>
+        <dl class="about-list"><div><dt>Name</dt><dd>Chicago</dd></div><div><dt>Profile ID</dt><dd>#3263</dd></div><div><dt>Joined</dt><dd>2 May 2026</dd></div><div><dt>Find me on</dt><dd>Discord, YouTube &amp; Xbox</dd></div></dl>
+      </section>
+    </div>
+  </main>
+
+  <div class="audio-control" id="audio-control">
+    <button class="sound-control" id="sound-button" type="button" aria-label="Mute music" aria-pressed="false" aria-controls="volume-slider"><svg class="icon" aria-hidden="true"><use id="sound-icon" href="#icon-volume"/></svg></button>
+    <div class="volume-area"><label class="sr-only" for="volume-slider">Music volume</label><input id="volume-slider" type="range" min="0" max="100" value="50" aria-label="Music volume" style="--level:50%"/></div>
+  </div>
+</body>
+</html>
