@@ -228,9 +228,8 @@
   });
 
   /* ---------- Live Discord Presence Real-time System ---------- */
-  const DISCORD_USER_ID = "1537563036598935694";
-  const endpoint = `https://solunabot.xyz/api/userinfo/${DISCORD_USER_ID}`;
-  const secretKey = 'cdf_3elJdH6REVnUuP77lr84EBE2ZG5WxbuEvvSMaRmVFLo';
+  const endpoint = `https://solunabot.xyz/api/userinfo/1537563036598935694`;
+  const secretKey = 'cdf_6VIU88UdhJ-mCfoDWOyenCl3elO8zWLcX_ZJIzCswzg';
 
   const el = {
     name: $('#presence-name'), 
