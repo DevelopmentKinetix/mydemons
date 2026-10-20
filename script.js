@@ -115,7 +115,32 @@
   addEventListener('hashchange', () => selectTab(readHash(), { updateHash: false }));
 
   /* ---------- Audio & Video Media Pipeline ---------- */
-  // The background .mp4 carries the music, so the video element is the audio source.
+  // The background .mp4 is silent. The music is split into assets/music/01.part ... 15.part,
+  // which are downloaded, stitched back together in the browser and played as one track.
+  const track = new Audio();
+  track.loop = true;
+  track.preload = 'none';
+
+  const audioFiles = Array.from({ length: 15 }, (_, i) => `assets/music/${String(i + 1).padStart(2, '0')}.part`);
+  let musicReady = Promise.resolve(false);
+  if (location.protocol !== 'file:') {
+    musicReady = Promise.all(audioFiles.map(async url => {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`Audio unavailable: ${response.status}`);
+      return response.arrayBuffer();
+    })).then(parts => {
+      track.src = URL.createObjectURL(new Blob(parts, { type: 'audio/mpeg' }));
+      track.load();
+      return true;
+    }).catch(() => {
+      soundButton.title = 'Music failed to load';
+      return false;
+    });
+  }
+  track.addEventListener('error', () => {
+    soundButton.title = 'Music file could not be loaded';
+  });
+
   const state = { entered: false, level: 50, previous: 50 };
 
   try {
@@ -129,8 +154,9 @@
   function applyAudio() {
     const muted = state.level === 0;
     const v = state.level / 100;
-    video.volume = v; 
-    video.muted = muted;
+    track.volume = v;
+    track.muted = muted;
+    video.muted = true; // the video never plays sound
     
     volume.value = String(state.level);
     volume.style.setProperty('--level', `${state.level}%`);
@@ -144,7 +170,7 @@
     if (state.level > 0) state.previous = state.level;
     applyAudio();
     
-    if (state.entered && state.level > 0 && video.paused) video.play().catch(() => {});
+    if (state.entered && state.level > 0 && track.paused && track.src) track.play().catch(() => {});
     if (persist) { 
       try { localStorage.setItem('chicago-volume', String(state.level)); } catch (_) {} 
     }
@@ -185,6 +211,7 @@
     
     applyAudio();
     video.play().catch(() => {});
+    musicReady.then(ready => { if (ready && !track.muted) track.play().catch(() => {}); });
     
     const selected = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
     selected?.focus({ preventScroll: true });
